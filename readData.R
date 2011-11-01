@@ -3,7 +3,7 @@
 library(utils)
 
 # maybe a good idea to bump up your memory limit.
-# memory.limit(2500)
+# memory.limit(2500) # or bigger as needed
 
 # in windows, I use this option to route through a proxy
 # setInternet2(TRUE)
