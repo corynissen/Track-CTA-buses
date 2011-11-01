@@ -9,7 +9,7 @@ library(utils)
 # setInternet2(TRUE)
 
 # set a working directory
-setwd("d:/documents and settings/cniss/my documents/work/092211 logistics")
+setwd("/Track-CTA-buses")
 
 # URL can be as follows... http://tracklytics.com:8080/resourcetracker2/services/cta/historical?date=DD-MON-YY
 url <- "http://tracklytics.com:8080/resourcetracker2/services/cta/historical?date=19-OCT-11"
