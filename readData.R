@@ -3,7 +3,7 @@
 library(utils)
 
 # maybe a good idea to bump up your memory limit.
-# memory.limit(2500) # or bigger as needed
+memory.limit(6000) # or bigger as needed
 
 # in windows, I use this option to route through a proxy
 # setInternet2(TRUE)
@@ -12,14 +12,17 @@ library(utils)
 setwd("/Track-CTA-buses")
 
 # URL can be as follows... http://tracklytics.com:8080/resourcetracker2/services/cta/historical?date=DD-MON-YY
-url <- "http://tracklytics.com:8080/resourcetracker2/services/cta/historical?date=19-OCT-11"
+# get yesterday's date
+ydate <- toupper(format(Sys.Date()-1, "%d-%b-%y"))
+url <- paste("http://tracklytics.com:8080/resourcetracker2/services/cta/historical?date=", ydate, sep="")
 download.file(url, destfile = paste(getwd(),"data/datafile.zip", sep="/"))
 
 # extract zip file into "data" folder
 unzip("data/datafile.zip", exdir="data")
 
 # read the data, it's in XML sytle, but not a valid XML file
-fixscan <- scan("data/19-OCT-11.dat", what="character", sep="\n")
+fname <- paste("data/", ydate, ".dat", sep="")
+fixscan <- scan(fname, what="character", sep="\n")
 # I run out of memory on my laptop, make the data smaller...
 # fixscan <- fixscan[1:1500000]
 
@@ -56,4 +59,4 @@ fixdf$requesttime <- as.Date(fixdf$requesttime, "%d-%b-%y %H:%M:%S %p")
 
 # optional step...
 # save to file, it takes a couple minutes to do the previous steps
-save.image("data/fixdata.rdata")
+#save.image("data/fixdata.rdata")
