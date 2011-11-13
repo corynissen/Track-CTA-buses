@@ -5,7 +5,7 @@ require(geosphere)
 
 # run readData.R to create data/fixdata.rdata file
 # load data created in readData.R
-load("data/fixdata.rdata")
+#load("data/fixdata.rdata")
 
 getMileage <- function(data){
   # data:  dataframe with longitude and latitude columns in numeric format
@@ -19,11 +19,11 @@ getMileage <- function(data){
   # each lat long pair and it's lagged lat long pair  
   result <- distVincentyEllipsoid(cbind(data$latitude, data$longitude), cbind(data$lag_lat, data$lag_long))
   # sum and convert meters to miles
-  result <- sum(result, na.rm=T) / 1609.344
+  result <- round(sum(result, na.rm=T) / 1609.344,1)
   return(result)
 }
 
 a <- by(fixdf, fixdf$id, getMileage)
 mileage <- data.frame(id=as.character(names(a)), miles=as.numeric(a))
 rm(a); gc()
-write.csv(mileage, "output/distance_by_id.csv", row.names=F)
+#write.csv(mileage, "output/distance_by_id.csv", row.names=F)
