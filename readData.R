@@ -9,7 +9,7 @@ memory.limit(6000) # or bigger as needed
 # setInternet2(TRUE)
 
 # set a working directory
-setwd("/Track-CTA-buses")
+setwd("/src/git/Track-CTA-buses")
 
 # URL can be as follows... http://tracklytics.com:8080/resourcetracker2/services/cta/historical?date=DD-MON-YY
 # get yesterday's date
