@@ -8,7 +8,7 @@ con <- odbcConnect("CTA")
 # can only write out 4000 or so characters before R has issues, so we have to break
 # the write up into several pieces...
 n <- 250  # the number of rows written per write
-for(i in 1:ceiling(dim(mileage)[1], i*n){
+for(i in 1:ceiling(dim(mileage)[1] / n)){
   min <- i*n-(n-1)
   print(min)
   max <- min(dim(mileage)[1], i*n)
