@@ -1,17 +1,27 @@
 
 require(RODBC)
 
-# reformat dataframe to make it semi-colon delimited clob
-clob <- paste(mileage$id, mileage$miles, sep=",", collapse=";")
-
 # setup connect to CTA, a unixODBC data source on my computer
 con <- odbcConnect("CTA")
 
 # append mileage df to tablename
-# will save response message to response variable
-response <- sqlQuery(con, paste("call pg_cta.WriteAllBusMileage('", ydate, "', '", clob, "')", sep=""))
+# can only write out 4000 or so characters before R has issues, so we have to break
+# the write up into several pieces...
+n <- 250  # the number of rows written per write
+for(i in 1:ceiling(dim(mileage)[1], i*n){
+  min <- i*n-(n-1)
+  print(min)
+  max <- min(dim(mileage)[1], i*n)
+  print(max)
+  df <- mileage[min:max,]
+  # reformat dataframe to make it semi-colon delimited clob
+  clob <- paste(df$id, df$miles, sep=",", collapse=";")
+  print(dim(df))
+  response <- sqlQuery(con, paste("call pg_cta.WriteAllBusMileage('", ydate, "', '", clob, "')", sep=""))
+  print(response) # "No Data" is a success in my case
+  }
 
 # close the connection to avoid warnings at shutdown of R
 odbcClose(con)
 
-# do something with response
+
