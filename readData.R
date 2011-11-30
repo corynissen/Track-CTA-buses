@@ -13,7 +13,7 @@ setwd("/src/git/Track-CTA-buses")
 
 # URL can be as follows... http://tracklytics.com:8080/resourcetracker2/services/cta/historical?date=DD-MON-YY
 # get yesterday's date
-ydate <- toupper(format(Sys.Date()-2, "%d-%b-%y"))
+ydate <- toupper(format(Sys.Date()-1, "%d-%b-%y"))
 url <- paste("http://tracklytics.com:8080/resourcetracker2/services/cta/historical?date=", ydate, sep="")
 download.file(url, destfile = paste(getwd(),"data/datafile.zip", sep="/"))
 
