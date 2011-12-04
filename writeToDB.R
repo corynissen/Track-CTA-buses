@@ -15,9 +15,9 @@ for(i in 1:ceiling(dim(mileage)[1] / n)){
   print(max)
   df <- mileage[min:max,]
   # reformat dataframe to make it semi-colon delimited clob
-  clob <- paste(df$id, df$miles, sep=",", collapse=";")
+  clob <- paste(df$id, df$route, df$miles, sep=",", collapse=";")
   print(dim(df))
-  response <- sqlQuery(con, paste("call pg_cta.WriteAllBusMileage('", ydate, "', '", clob, "')", sep=""))
+  response <- sqlQuery(con, paste("call pg_cta.WriteAllBusRouteMileage('", ydate, "', '", clob, "')", sep=""))
   print(response) # "No Data" is a success in my case
   }
 
