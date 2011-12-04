@@ -2,6 +2,7 @@
 # code to return a list of IDs (buses) and their daily mileage
 
 require(geosphere)
+require(plyr)
 
 # run readData.R to create data/fixdata.rdata file
 # load data created in readData.R
@@ -23,7 +24,7 @@ getMileage <- function(data){
   return(result)
 }
 
-a <- by(fixdf, fixdf$id, getMileage)
-mileage <- data.frame(id=as.character(names(a)), miles=as.numeric(a))
-rm(a); gc()
+mileage <- ddply(fixdf, c("id", "route"), getMileage)
+names(mileage) <- c("id", "route", "miles")
 #write.csv(mileage, "output/distance_by_id.csv", row.names=F)
+
