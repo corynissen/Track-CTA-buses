@@ -16,7 +16,7 @@ for(i in 1:ceiling(dim(mileage)[1] / n)){
   df <- mileage[min:max,]
   # reformat dataframe to make it semi-colon delimited clob
   clob1 <- paste(df$id, df$route, df$miles, sep=",", collapse=";")
-  clob1 <- paste(df$id, df$route, df$idle, df$move, sep=",", collapse=";")
+  clob2 <- paste(df$id, df$route, df$idle, df$move, sep=",", collapse=";")
   print(dim(df))
   response1 <- sqlQuery(con, paste("call pg_cta.WriteAllBusRouteMileage('", ydate, "', '", clob1, "')", sep=""))
   response2 <- sqlQuery(con, paste("call pg_cta.WriteAllBusUtilization('", ydate, "', '", clob2, "')", sep=""))
