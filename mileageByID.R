@@ -22,7 +22,9 @@ getMileage <- function(data){
   # use distVincentyEllipsoid function to calculate the distances between
   # each lat long pair and it's lagged lat long pair  
   dist <- distVincentyEllipsoid(cbind(data$latitude, data$longitude), cbind(data$lag_lat, data$lag_long))
-  timediff <- data$interval - data$lag_time  
+  timediff <- data$interval - data$lag_time
+  # make sure time diff is non-negative
+  timediff[timediff < 0] <- 0
   # sum and convert meters to miles
   sumdist <- round(sum(dist, na.rm=T) / 1609.344,1)
   distThreshold <- 20 # meters, I think
