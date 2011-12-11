@@ -54,9 +54,6 @@ rm(list=labels); gc()
 # some data cleanup
 fixdf$latitude <- as.numeric(fixdf$latitude)
 fixdf$longitude <- as.numeric(fixdf$longitude)
-fixdf$fixdate <- as.Date(fixdf$fixdate, "%d-%b-%y %H:%M:%S %p")
-fixdf$intervaltime <- as.Date(fixdf$intervaltime, "%d-%b-%y %H:%M:%S %p")
-fixdf$requesttime <- as.Date(fixdf$requesttime, "%d-%b-%y %H:%M:%S %p")
 
 # optional step...
 # save to file, it takes a couple minutes to do the previous steps
